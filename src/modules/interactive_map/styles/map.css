@@ -1,0 +1,505 @@
+/* ============================================
+   MODERN GLASS UI - Contemporary Design System
+   Clean, Minimal, Elegant
+   ============================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+:root {
+  /* Modern Color Palette */
+  --modern-primary: #6366f1;
+  --modern-primary-light: #818cf8;
+  --modern-primary-dark: #4f46e5;
+  --modern-primary-muted: rgba(99, 102, 241, 0.5);
+
+  --modern-accent: #06b6d4;
+  --modern-accent-light: #22d3ee;
+  --modern-accent-dark: #0891b2;
+
+  --modern-success: #10b981;
+  --modern-warning: #f59e0b;
+  --modern-danger: #ef4444;
+
+  --modern-white: #ffffff;
+  --modern-gray-50: #f9fafb;
+  --modern-gray-100: #f3f4f6;
+  --modern-gray-200: #e5e7eb;
+  --modern-gray-300: #d1d5db;
+  --modern-gray-400: #9ca3af;
+  --modern-gray-500: #6b7280;
+  --modern-gray-600: #4b5563;
+  --modern-gray-700: #374151;
+  --modern-gray-800: #1f2937;
+  --modern-gray-900: #111827;
+  --modern-gray-950: #030712;
+
+  /* Glass Effect Variables */
+  --glass-bg: rgba(255, 255, 255, 0.08);
+  --glass-bg-hover: rgba(255, 255, 255, 0.12);
+  --glass-border: rgba(255, 255, 255, 0.15);
+  --glass-border-hover: rgba(255, 255, 255, 0.25);
+  --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  --glass-blur: blur(20px);
+
+  /* Dark Glass */
+  --glass-dark-bg: rgba(17, 24, 39, 0.75);
+  --glass-dark-border: rgba(255, 255, 255, 0.1);
+
+  /* Typography */
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', 'Consolas', monospace;
+  --font-display: var(--font-sans);
+  --font-body: var(--font-sans);
+  --font-terminal: var(--font-mono);
+  --font-typewriter: var(--font-mono);
+  --font-headline: var(--font-sans);
+}
+
+/* ============================================
+   GLASS PANEL - Primary UI Component
+   ============================================ */
+
+.lore-panel {
+  background: var(--glass-dark-bg);
+  backdrop-filter: var(--glass-blur) saturate(180%);
+  -webkit-backdrop-filter: var(--glass-blur) saturate(180%);
+  border: 1px solid var(--glass-dark-border);
+  border-radius: 16px;
+  box-shadow:
+    0 4px 6px -1px rgba(0, 0, 0, 0.1),
+    0 2px 4px -2px rgba(0, 0, 0, 0.1),
+    0 0 0 1px rgba(255, 255, 255, 0.05) inset;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Subtle gradient accent on top */
+.lore-panel::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(99, 102, 241, 0.5) 25%,
+    rgba(6, 182, 212, 0.5) 75%,
+    transparent 100%
+  );
+}
+
+.lore-panel::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.03) 0%,
+    transparent 50%
+  );
+  pointer-events: none;
+  border-radius: inherit;
+}
+
+/* ============================================
+   ATMOSPHERIC EFFECTS - Minimal Modern
+   ============================================ */
+
+/* Subtle Vignette */
+.atmospheric-glow::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    ellipse 100% 100% at center,
+    transparent 0%,
+    transparent 60%,
+    rgba(3, 7, 18, 0.4) 100%
+  );
+  pointer-events: none;
+  z-index: 90;
+}
+
+/* Minimal Noise Texture */
+.film-grain::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  opacity: 0.02;
+  pointer-events: none;
+  z-index: 100;
+  mix-blend-mode: overlay;
+}
+
+/* Subtle Grid Pattern */
+.scanlines::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(99, 102, 241, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(99, 102, 241, 0.03) 1px, transparent 1px);
+  background-size: 50px 50px;
+  pointer-events: none;
+}
+
+/* ============================================
+   TYPOGRAPHY - Clean & Modern
+   ============================================ */
+
+.mafia-title,
+.cyber-title {
+  font-family: var(--font-sans);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  color: var(--modern-white);
+}
+
+.mafia-headline {
+  font-family: var(--font-sans);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: var(--modern-gray-100);
+}
+
+.mafia-text,
+.cyber-text {
+  font-family: var(--font-sans);
+  font-weight: 400;
+  line-height: 1.6;
+  color: var(--modern-gray-300);
+}
+
+.mafia-typewriter,
+.cyber-mono {
+  font-family: var(--font-mono);
+  font-weight: 500;
+  letter-spacing: 0;
+  color: var(--modern-gray-200);
+}
+
+/* ============================================
+   GLOW EFFECTS - Subtle & Modern
+   ============================================ */
+
+.neon-glow {
+  text-shadow: 0 0 20px rgba(99, 102, 241, 0.3);
+}
+
+.neon-glow-warning {
+  text-shadow: 0 0 15px rgba(245, 158, 11, 0.3);
+}
+
+.glitch {
+  animation: subtle-pulse 3s ease-in-out infinite;
+}
+
+@keyframes subtle-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.95; }
+}
+
+/* ============================================
+   STATUS INDICATORS - Modern Pills
+   ============================================ */
+
+.status-indicator {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  margin-right: 10px;
+  animation: status-pulse 2s ease-in-out infinite;
+}
+
+.status-active {
+  background: var(--modern-primary);
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.2);
+}
+
+.status-warning {
+  background: var(--modern-warning);
+  box-shadow: 0 0 0 3px rgba(245, 158, 11, 0.2);
+}
+
+.status-critical {
+  background: var(--modern-danger);
+  box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.2);
+}
+
+@keyframes status-pulse {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.7;
+    transform: scale(0.9);
+  }
+}
+
+/* ============================================
+   MAP ZONES - Modern Hover Effects
+   ============================================ */
+
+.map-area {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.map-area:hover {
+  filter: brightness(1.15) saturate(1.1);
+}
+
+/* ============================================
+   BUTTONS - Glass Style
+   ============================================ */
+
+.mafia-button {
+  background: var(--glass-bg);
+  backdrop-filter: blur(12px);
+  border: 1px solid var(--glass-border);
+  border-radius: 12px;
+  color: var(--modern-white);
+  font-family: var(--font-sans);
+  font-weight: 500;
+  letter-spacing: 0;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.mafia-button:hover {
+  background: var(--glass-bg-hover);
+  border-color: var(--glass-border-hover);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+  transform: translateY(-1px);
+}
+
+.mafia-button:active {
+  transform: translateY(0);
+}
+
+/* ============================================
+   BADGES & TAGS - Pill Style
+   ============================================ */
+
+.mafia-badge {
+  background: rgba(99, 102, 241, 0.15);
+  border: 1px solid rgba(99, 102, 241, 0.3);
+  border-radius: 9999px;
+  color: var(--modern-primary-light);
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0;
+  padding: 0.35rem 0.75rem;
+}
+
+.mafia-badge-warning {
+  background: rgba(245, 158, 11, 0.15);
+  border-color: rgba(245, 158, 11, 0.3);
+  color: var(--modern-warning);
+}
+
+.mafia-badge-danger {
+  background: rgba(239, 68, 68, 0.15);
+  border-color: rgba(239, 68, 68, 0.3);
+  color: var(--modern-danger);
+}
+
+/* ============================================
+   CARDS - Glass Morphism
+   ============================================ */
+
+.mafia-card {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+  backdrop-filter: blur(8px);
+}
+
+.mafia-card-elevated {
+  background: rgba(255, 255, 255, 0.08);
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+}
+
+/* ============================================
+   DECORATIVE ELEMENTS - Minimal
+   ============================================ */
+
+.art-deco-divider {
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--modern-primary-muted) 50%,
+    transparent
+  );
+  margin: 1.25rem 0;
+}
+
+/* ============================================
+   INPUTS - Modern Style
+   ============================================ */
+
+.mafia-input {
+  background: rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  color: var(--modern-white);
+  font-family: var(--font-sans);
+  transition: all 0.2s ease;
+}
+
+.mafia-input:focus {
+  border-color: var(--modern-primary);
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.15);
+  outline: none;
+}
+
+.mafia-input::placeholder {
+  color: var(--modern-gray-500);
+}
+
+/* ============================================
+   SCROLLBAR - Minimal
+   ============================================ */
+
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.25);
+}
+
+/* ============================================
+   LOADING & ERROR STATES
+   ============================================ */
+
+.loading-error {
+  font-family: var(--font-mono);
+  font-weight: 500;
+  color: var(--modern-danger);
+}
+
+/* ============================================
+   CASE NOTES - Modern Cards
+   ============================================ */
+
+.case-note {
+  background: linear-gradient(
+    145deg,
+    rgba(255, 255, 255, 0.1) 0%,
+    rgba(255, 255, 255, 0.05) 100%
+  );
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+  border-radius: 12px;
+}
+
+.case-note-selected {
+  box-shadow:
+    0 8px 30px rgba(0, 0, 0, 0.2),
+    0 0 0 2px var(--modern-primary-muted);
+}
+
+/* ============================================
+   RESPONSIVE DESIGN
+   ============================================ */
+
+@media (max-width: 768px) {
+  .status-indicator {
+    width: 6px;
+    height: 6px;
+    margin-right: 8px;
+  }
+
+  .lore-panel {
+    border-radius: 12px;
+  }
+}
+
+/* ============================================
+   MAP FILTER - Vibrant Modern
+   ============================================ */
+
+.sepia-map {
+  filter: saturate(1.05) contrast(1.02) brightness(0.95);
+}
+
+/* ============================================
+   HOVER TRANSITIONS
+   ============================================ */
+
+.mafia-hover {
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.mafia-hover:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+/* ============================================
+   UTILITY CLASSES
+   ============================================ */
+
+.text-mafia-gold { color: var(--modern-primary-light); }
+.text-mafia-cream { color: var(--modern-gray-200); }
+.text-mafia-burgundy { color: var(--modern-danger); }
+.border-mafia-gold { border-color: var(--modern-primary); }
+.bg-mafia-dark { background-color: var(--modern-gray-900); }
+
+/* ============================================
+   FOCUS STATES - Accessibility
+   ============================================ */
+
+*:focus-visible {
+  outline: 2px solid var(--modern-primary);
+  outline-offset: 2px;
+}
+
+button:focus-visible,
+[role="button"]:focus-visible {
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.3);
+}
+
+/* ============================================
+   ANIMATIONS
+   ============================================ */
+
+.subtle-glitch {
+  animation: elegant-breathe 4s ease-in-out infinite;
+}
+
+@keyframes elegant-breathe {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.98; }
+}
+
+/* Shimmer Effect */
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+.shimmer {
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.1) 50%,
+    transparent 100%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 2s infinite;
+}
