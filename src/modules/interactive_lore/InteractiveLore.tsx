@@ -9,6 +9,13 @@ gsap.registerPlugin(ScrollTrigger);
 // Cinematic scenes data
 const SCENES = [
   {
+    id: "landing",
+    type: "landing",
+    title: "SAN ANDREAS",
+    subtitle: "2026",
+    tagline: "LA VILLE OÙ TOUT EST À PRENDRE",
+  },
+  {
     id: "intro",
     type: "hero",
     title: "VI",
@@ -21,17 +28,17 @@ const SCENES = [
     id: "scene-1",
     type: "parallax",
     title: "LEONIDA",
-    subtitle: "VICE CITY • 2025",
+    subtitle: "VICE CITY • 2026",
     text: "Une ville de néons et de mensonges. Où le soleil brûle aussi fort que les ambitions.",
-    background: "https://images.unsplash.com/photo-1514214246283-d427a95c5d2f?w=1920&q=80",
+    background: "/test1.png",
   },
   {
     id: "scene-2",
     type: "split",
     title: "LUCIA",
     subtitle: "THE SURVIVOR",
-    text: "Elle a tout perdu. Maintenant, elle reprend tout.",
-    side: "left",
+	text: "Proin eget laoreet magna. Curabitur fermentum accumsan dictum. Donec eleifend metus sit amet nisl ultricies, et pharetra turpis facilisis. Curabitur pulvinar malesuada accumsan. Nam condimentum urna et laoreet scelerisque. Aliquam feugiat accumsan erat, sit amet pulvinar sapien sodales eu. Nulla varius ac nunc vitae rutrum. Nam quis nunc porttitor, facilisis velit in, rutrum sem. Aliquam pulvinar purus tellus, sed pulvinar ante posuere eleifend. Nunc leo metus, rutrum eget ornare nec, sollicitudin et nibh. Aenean congue magna scelerisque magna tempus dapibus. Nam feugiat pulvinar imperdiet. Vestibulum arcu enim, sodales eu malesuada ut, volutpat in sapien. Fusce vitae purus et nibh faucibus imperdiet. Pellentesque interdum, ipsum et hendrerit convallis, urna libero blandit purus, in interdum odio mauris ullamcorper purus. Fusce ullamcorper justo vel lectus pretium, in imperdiet enim cursus.",
+	side: "left",
     image: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=1200&q=80",
   },
   {
@@ -40,16 +47,16 @@ const SCENES = [
     title: "THE STREETS",
     subtitle: "REMEMBER EVERYTHING",
     text: "Chaque corner a une histoire. Chaque deal a un prix.",
-    background: "https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?w=1920&q=80",
+    background: "https://i.redd.it/h796v3fl7br21.png",
   },
   {
     id: "scene-4",
     type: "split",
     title: "POWER",
     subtitle: "COMES AT A COST",
-    text: "Dans cette ville, la loyauté est une monnaie rare.",
-    side: "right",
-    image: "https://images.unsplash.com/photo-1605379399642-870262d3d051?w=1200&q=80",
+	text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc lectus eros, suscipit non mauris non, blandit vulputate ligula. Quisque iaculis magna sed dui mollis, nec pellentesque enim laoreet. Ut et ultricies massa. Nunc feugiat nibh sit amet luctus vestibulum. Curabitur aliquet justo eget erat facilisis dignissim. Sed elit quam, vestibulum nec mi at, molestie tristique nisl. Vivamus rhoncus, quam consequat fermentum auctor, ipsum justo faucibus lacus, quis dapibus lectus purus vel arcu. Praesent accumsan velit et metus tristique, nec sollicitudin ex malesuada. Fusce consequat lacinia commodo. Donec congue maximus quam, et cursus leo lobortis eget. Sed id tellus vitae ipsum efficitur bibendum sed eu neque. Etiam sollicitudin volutpat magna ut mollis.",
+	side: "right",
+    image: "https://i.pinimg.com/1200x/65/17/60/6517605f120f04db1292c37da63b7460.jpg",
   },
   {
     id: "scene-5",
@@ -75,6 +82,7 @@ export function InteractiveLore() {
   const [videoReady, setVideoReady] = useState(false);
   const [framesLoaded, setFramesLoaded] = useState(false);
   const [frameLoadProgress, setFrameLoadProgress] = useState(0);
+  const [videoVisible, setVideoVisible] = useState(false);
 
   // Total frames to extract (more = smoother but more memory)
   const TOTAL_FRAMES = 120;
@@ -185,8 +193,19 @@ export function InteractiveLore() {
 
     const handleScroll = () => {
       const scrollTop = container.scrollTop;
+      // La vidéo commence après la landing page (100vh)
+      const landingHeight = window.innerHeight;
+      const videoStartScroll = scrollTop - landingHeight;
       const scrollRange = window.innerHeight * 2;
-      const scrollProgress = Math.max(0, Math.min(1, scrollTop / scrollRange));
+
+      // Activer la visibilité de la vidéo quand on scroll au-delà de la landing
+      if (videoStartScroll > 0) {
+        setVideoVisible(true);
+      } else {
+        setVideoVisible(false);
+      }
+
+      const scrollProgress = Math.max(0, Math.min(1, videoStartScroll / scrollRange));
 
       targetFrameIndex = scrollProgress * (frames.length - 1);
     };
@@ -234,6 +253,49 @@ export function InteractiveLore() {
           scrub: 0.3,
         },
       });
+
+      // Landing scene animations
+      const landingScene = container.querySelector(".scene--landing");
+      if (landingScene) {
+        // Initial entrance animation
+        const landingTl = gsap.timeline({ delay: 0.3 });
+        landingTl
+          .fromTo(".landing-title",
+            { opacity: 0, y: 80, clipPath: "inset(100% 0% 0% 0%)" },
+            { opacity: 1, y: 0, clipPath: "inset(0% 0% 0% 0%)", duration: 1.5, ease: "power4.out" }
+          )
+          .fromTo(".landing-subtitle",
+            { opacity: 0, y: 30 },
+            { opacity: 1, y: 0, duration: 1, ease: "power3.out" },
+            "-=0.8"
+          )
+          .fromTo(".landing-tagline",
+            { opacity: 0, letterSpacing: "1em" },
+            { opacity: 0.6, letterSpacing: "0.5em", duration: 1.2, ease: "power2.out" },
+            "-=0.6"
+          )
+          .fromTo(".landing-scroll-indicator",
+            { opacity: 0, y: -20 },
+            { opacity: 1, y: 0, duration: 0.8, ease: "power2.out" },
+            "-=0.3"
+          );
+
+        // Parallax exit on scroll
+        gsap.timeline({
+          scrollTrigger: {
+            trigger: landingScene,
+            scroller: container,
+            start: "top top",
+            end: "bottom top",
+            scrub: 1,
+          },
+        })
+          .to(".landing-title", { y: -150, opacity: 0, ease: "power2.in" }, 0)
+          .to(".landing-subtitle", { y: -80, opacity: 0, ease: "power2.in" }, 0)
+          .to(".landing-tagline", { y: -50, opacity: 0, ease: "power2.in" }, 0)
+          .to(".landing-scroll-indicator", { opacity: 0, ease: "power2.in" }, 0)
+          .to(".landing-bg-gradient", { opacity: 0, ease: "power2.in" }, 0);
+      }
 
       // Hero scene animations - NO PIN, use CSS sticky instead
       const heroScene = container.querySelector(".scene--hero");
@@ -461,11 +523,34 @@ export function InteractiveLore() {
   // Scene renderer
   const renderScene = useCallback((scene: (typeof SCENES)[number]) => {
     switch (scene.type) {
+      case "landing":
+        return (
+          <section key={scene.id} className="scene scene--landing">
+            <div className="landing-bg">
+              <div className="landing-bg-gradient" />
+              <div className="landing-bg-noise" />
+            </div>
+            <div className="landing-content">
+              <span className="landing-subtitle">{scene.subtitle}</span>
+              <h1 className="landing-title">{scene.title}</h1>
+              <p className="landing-tagline">{scene.tagline}</p>
+            </div>
+            <div className="landing-scroll-indicator">
+              <span>DÉCOUVRIR</span>
+              <div className="scroll-indicator-arrow">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                  <path d="M12 4L12 20M12 20L5 13M12 20L19 13" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                </svg>
+              </div>
+            </div>
+          </section>
+        );
+
       case "hero":
         return (
           <section key={scene.id} className="video-scroll-section">
             <div className="video-scroll-sticky">
-              <div className="scene scene--hero">
+              <div className={`scene scene--hero ${videoVisible ? 'scene--hero-visible' : ''}`}>
                 <div className="hero-video-container">
                   {/* Hidden video for frame extraction */}
                   <video
@@ -586,7 +671,7 @@ export function InteractiveLore() {
       default:
         return null;
     }
-  }, []);
+  }, [videoVisible, frameLoadProgress, framesLoaded, videoReady]);
 
   return (
     <>
