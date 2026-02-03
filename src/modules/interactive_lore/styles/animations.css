@@ -1,0 +1,303 @@
+/* ========================================
+   INTERACTIVE LORE - Animations & Effects
+   Palette: Rouge ID / Noir / Blanc
+   ======================================== */
+
+/* ================================
+   CSS Variables - Color Palette
+   ================================ */
+:root {
+	/* Primary - Rouge (from logo) */
+	--lore-primary: #D91E1E;
+	--lore-primary-dark: #8C0E0E;
+	--lore-primary-light: #FF4444;
+	--lore-primary-glow: rgba(217, 30, 30, 0.4);
+
+	/* Neutral - Noir & Blanc */
+	--lore-black: #050505;
+	--lore-black-soft: #0A0A0A;
+	--lore-black-medium: #121212;
+	--lore-white: #FFFFFF;
+	--lore-white-muted: rgba(255, 255, 255, 0.6);
+	--lore-white-subtle: rgba(255, 255, 255, 0.1);
+
+	/* Accent - Touches chaudes subtiles */
+	--lore-accent-warm: #FF6B35;
+	--lore-accent-gold: #C9A227;
+
+	/* Silver gradient (from logo "D") */
+	--lore-silver-light: #FFFFFF;
+	--lore-silver-mid: #C9C9C9;
+	--lore-silver-dark: #8F8F8F;
+
+	/* Typography */
+	--lore-font-display: "Oswald", "Bebas Neue", sans-serif;
+	--lore-font-body: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+
+	/* Easing */
+	--lore-ease-smooth: cubic-bezier(0.25, 0.1, 0.25, 1);
+	--lore-ease-out-expo: cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+/* ================================
+   Film Grain Overlay
+   ================================ */
+.lore-film-grain {
+	position: fixed;
+	inset: 0;
+	z-index: 1000;
+	pointer-events: none;
+	opacity: 0.035;
+	background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+	background-repeat: repeat;
+	animation: lore-grain 0.5s steps(10) infinite;
+}
+
+@keyframes lore-grain {
+
+	0%,
+	100% {
+		transform: translate(0, 0);
+	}
+
+	10% {
+		transform: translate(-1%, -1%);
+	}
+
+	20% {
+		transform: translate(1%, 1%);
+	}
+
+	30% {
+		transform: translate(-1%, 1%);
+	}
+
+	40% {
+		transform: translate(1%, -1%);
+	}
+
+	50% {
+		transform: translate(-1%, 0%);
+	}
+
+	60% {
+		transform: translate(1%, 0%);
+	}
+
+	70% {
+		transform: translate(0%, -1%);
+	}
+
+	80% {
+		transform: translate(0%, 1%);
+	}
+
+	90% {
+		transform: translate(-1%, -1%);
+	}
+}
+
+/* ================================
+   Scroll Indicators
+   ================================ */
+@keyframes lore-bounce-arrow {
+
+	0%,
+	100% {
+		transform: translateY(0);
+		opacity: 0.6;
+	}
+
+	50% {
+		transform: translateY(10px);
+		opacity: 1;
+	}
+}
+
+@keyframes lore-scroll-pulse {
+
+	0%,
+	100% {
+		opacity: 0.3;
+		transform: scaleY(1);
+	}
+
+	50% {
+		opacity: 1;
+		transform: scaleY(1.2);
+	}
+}
+
+.lore-scroll-arrow {
+	animation: lore-bounce-arrow 2s ease-in-out infinite;
+}
+
+.lore-scroll-line {
+	animation: lore-scroll-pulse 2s ease-in-out infinite;
+}
+
+/* ================================
+   Loading Animation
+   ================================ */
+@keyframes lore-logo-pulse {
+
+	0%,
+	100% {
+		filter: drop-shadow(0 0 20px var(--lore-primary-glow));
+	}
+
+	50% {
+		filter: drop-shadow(0 0 40px var(--lore-primary-glow));
+	}
+}
+
+.lore-logo-loading {
+	animation: lore-logo-pulse 2s ease-in-out infinite;
+}
+
+/* ================================
+   Progress Bar Gradient
+   ================================ */
+.lore-progress-gradient {
+	background: linear-gradient(90deg,
+			var(--lore-primary-dark) 0%,
+			var(--lore-primary) 50%,
+			var(--lore-primary-light) 100%);
+}
+
+/* ================================
+   Background Gradients
+   ================================ */
+.lore-bg-radial-red {
+	background: radial-gradient(ellipse at center,
+			rgba(217, 30, 30, 0.08) 0%,
+			rgba(10, 10, 10, 0) 50%,
+			var(--lore-black) 100%);
+}
+
+.lore-bg-gradient-dark {
+	background: linear-gradient(180deg,
+			var(--lore-black) 0%,
+			var(--lore-black-medium) 50%,
+			var(--lore-black) 100%);
+}
+
+/* ================================
+   Text Glow Effects
+   ================================ */
+.lore-text-glow {
+	text-shadow: 0 0 80px var(--lore-primary-glow);
+}
+
+.lore-text-glow-white {
+	text-shadow: 0 0 120px rgba(255, 255, 255, 0.15);
+}
+
+/* ================================
+   Video Overlay Gradient
+   ================================ */
+.lore-video-overlay {
+	background: linear-gradient(to bottom,
+			rgba(10, 10, 10, 0.2) 0%,
+			rgba(10, 10, 10, 0.4) 50%,
+			rgba(10, 10, 10, 0.8) 100%);
+}
+
+/* ================================
+   Parallax Overlay
+   ================================ */
+.lore-parallax-overlay {
+	background: linear-gradient(135deg,
+			rgba(10, 10, 10, 0.85) 0%,
+			rgba(10, 10, 10, 0.5) 50%,
+			rgba(10, 10, 10, 0.7) 100%);
+}
+
+/* ================================
+   Split Image Overlays
+   ================================ */
+.lore-split-overlay-left {
+	background: linear-gradient(to right,
+			rgba(10, 10, 10, 0.3) 0%,
+			rgba(10, 10, 10, 0.1) 100%);
+}
+
+.lore-split-overlay-right {
+	background: linear-gradient(to left,
+			rgba(10, 10, 10, 0.3) 0%,
+			rgba(10, 10, 10, 0.1) 100%);
+}
+
+/* ================================
+   Custom Scrollbar
+   ================================ */
+.lore-scrollbar::-webkit-scrollbar {
+	width: 6px;
+}
+
+.lore-scrollbar::-webkit-scrollbar-track {
+	background: transparent;
+}
+
+.lore-scrollbar::-webkit-scrollbar-thumb {
+	background: rgba(255, 255, 255, 0.15);
+	border-radius: 3px;
+}
+
+.lore-scrollbar::-webkit-scrollbar-thumb:hover {
+	background: var(--lore-primary);
+}
+
+/* ================================
+   Button Styles
+   ================================ */
+.lore-btn-primary {
+	border: 1px solid var(--lore-primary);
+	color: var(--lore-primary);
+	transition: all 0.4s var(--lore-ease-smooth);
+}
+
+.lore-btn-primary:hover {
+	background: var(--lore-primary);
+	color: var(--lore-black);
+}
+
+.lore-btn-primary svg {
+	transition: transform 0.4s var(--lore-ease-smooth);
+}
+
+.lore-btn-primary:hover svg {
+	transform: translateX(5px);
+}
+
+/* ================================
+   Noise Background
+   ================================ */
+.lore-noise-bg {
+	opacity: 0.03;
+	background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+}
+
+/* ================================
+   Responsive & Reduced Motion
+   ================================ */
+@media (max-width: 768px) {
+	.lore-parallax-bg {
+		inset: 0 !important;
+	}
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+	.lore-film-grain,
+	.lore-scroll-arrow,
+	.lore-scroll-line,
+	.lore-logo-loading {
+		animation: none;
+	}
+
+	* {
+		transition-duration: 0.01ms !important;
+		animation-duration: 0.01ms !important;
+	}
+}
